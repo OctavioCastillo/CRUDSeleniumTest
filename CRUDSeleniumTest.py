@@ -40,38 +40,38 @@ class CRUD_TEST(unittest.TestCase):
         else:
             self.driver.refresh()
 
-    # def test_create_new_record(self):
-    #     output = self.create("luis1", "luis1@gmail.com", "25", "create")
-    #     self.assertEqual(output, "Successfully added!")
+    def test_create_new_record(self):
+        output = self.create("luis1", "luis1@gmail.com", "25", "create")
+        self.assertEqual(output, "Successfully added!")
 
-    # def test_create_new_record_existing_email(self):
-    #     output = self.create("luis1", "luis1@gmail.com", "25", "create")
-    #     self.assertEqual(output, "That email is already taken.")
+    def test_create_new_record_existing_email(self):
+        output = self.create("luis1", "luis1@gmail.com", "25", "create")
+        self.assertEqual(output, "That email is already taken.")
 
-    # def test_modify_age(self):
-    #     self.modify_record = self.wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div/div[2]/table/tbody/tr[1]/td[5]/button[1]')))
-    #     self.modify_record.click()
-    #     age = self.driver.find_element(By.NAME, "age")
-    #     time.sleep(5)
-    #     age.clear()
-    #     age.send_keys("50")
-    #     self.wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[3]/div/div[2]/form/button'))).click()
-    #     output = self.wait.until(EC.visibility_of_element_located((By.XPATH, '/html/body/div[3]/div/div[2]/form/div[4]/div/p'))).text
-    #     print(output)
-    #     self.assertEqual(output, "Successfully updated!")
+    def test_modify_age(self):
+        self.modify_record = self.wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div/div[2]/table/tbody/tr[1]/td[5]/button[1]')))
+        self.modify_record.click()
+        age = self.driver.find_element(By.NAME, "age")
+        time.sleep(5)
+        age.clear()
+        age.send_keys("50")
+        self.wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[3]/div/div[2]/form/button'))).click()
+        output = self.wait.until(EC.visibility_of_element_located((By.XPATH, '/html/body/div[3]/div/div[2]/form/div[4]/div/p'))).text
+        print(output)
+        self.assertEqual(output, "Successfully updated!")
 
-    # def test_delete_record(self):
-    #     deleted_record = self.wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div/div[2]/table/tbody/tr[1]/td[5]/button[2]')))
-    #     deleted_record.click()
-    #     self.wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[3]/div/div[3]/button[1]'))).click()
+    def test_delete_record(self):
+        deleted_record = self.wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div/div[2]/table/tbody/tr[1]/td[5]/button[2]')))
+        deleted_record.click()
+        self.wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[3]/div/div[3]/button[1]'))).click()
 
-    # def test_find_one(self):
-    #     self.create("octavio", "octavio@gmail.com", "23", "pass")
-    #     self.create("diego", "diego@gmail.com", "23", "pass")
-    #     self.create("juan", "juan@gmail.com", "23", "pass")
-    #     name = self.wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div/div[2]/table/tbody/tr[2]/td[1]'))).text
-    #     print(name)
-    #     self.assertEqual("Diego", name)
+    def test_find_one(self):
+        self.create("octavio", "octavio@gmail.com", "23", "pass")
+        self.create("diego", "diego@gmail.com", "23", "pass")
+        self.create("juan", "juan@gmail.com", "23", "pass")
+        name = self.wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div/div[2]/table/tbody/tr[2]/td[1]'))).text
+        print(name)
+        self.assertEqual("Diego", name)
 
     def test_find_all(self):
         self.create("eduardo", "eduardo@gmail.com", "25", "pass")
@@ -85,13 +85,19 @@ class CRUD_TEST(unittest.TestCase):
         email3 = self.driver.find_element(By.XPATH, '/html/body/div[2]/div/div[2]/table/tbody/tr[3]/td[2]').text
         email4 = self.driver.find_element(By.XPATH, '/html/body/div[2]/div/div[2]/table/tbody/tr[4]/td[2]').text
 
-        # hacer 8 asserts para cada uno 
+        self.assertEqual("Eduardo", name1)
+        self.assertEqual("Juan", name2)
+        self.assertEqual("Diego", name3)
+        self.assertEqual("Octavio", name4)
+
+        self.assertEqual("eduardo@gmail.com", email1)
+        self.assertEqual("juan@gmail.com", email2)
+        self.assertEqual("diego@gmail.com", email3)
+        self.assertEqual("octavio@gmail.com", email4)
         
 
-    # def tearDown(self):
-    #     self.driver.refresh()
-    #     self.driver.quit()
+    def tearDown(self):
+        self.driver.refresh()
+        self.driver.quit()
 
 unittest.main()
-
-
